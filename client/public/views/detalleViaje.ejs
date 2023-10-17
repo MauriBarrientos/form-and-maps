@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalles del Viaje</title>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 300px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Viaje N<%= travel.id %> - Detalles del Viaje</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Origen</th>
+          <th>Destino</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= travel.origen %></td>
+          <td><%= travel.destino %></td>
+        </tr>
+      </tbody>
+    </table>
+    <div id="map"></div>
+    
+    
+    <script>
+      const latitud = parseFloat('<%= travel.origen_lat %>');
+      const longitud = parseFloat('<%= travel.origen_lng %>');
+
+    const map = L.map('map').setView([latitud, longitud], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    L.marker([latitud, longitud]).addTo(map);
+  </script>
+
+</body>
+</html>

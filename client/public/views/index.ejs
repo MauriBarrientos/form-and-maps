@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <style>
+    #map {
+    height: 300px;
+    width: 100%;
+  }
+  </style>
+  <title>Captura de datos de viaje</title>
+</head>
+<body>
+  <h1>Captura de datos de viaje</h1>
+  <form id="travelForm">
+    <label for="origen">Origen:</label>
+    <input type="text" id="origen" name="origen" required>
+    <br>
+    <label for="destino">Destino:</label>
+    <input type="text" id="destino" name="destino" required>
+    <br>
+    <div id="map"></div>
+    <input type="hidden" id="origenLat" name="origen_lat" value="-26.1775">
+    <input type="hidden" id="origenLng" name="origen_lng" value="-58.1787">
+    <button type="submit" id="submitBtn">Pedir remis</button>
+  </form>
+</body>
+<script src="../js/travelRequest.js"></script>
+<script src="../js/mapping.js" ></script>
+</html>
