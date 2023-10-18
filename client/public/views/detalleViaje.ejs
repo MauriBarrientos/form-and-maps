@@ -14,34 +14,34 @@
   </style>
 </head>
 <body>
-  <h1>Viaje N<%= travel.id %> - Detalles del Viaje</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Origen</th>
-          <th>Destino</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><%= travel.origen %></td>
-          <td><%= travel.destino %></td>
-        </tr>
-      </tbody>
-    </table>
-    <div id="map"></div>
-    
-    
-    <script>
-      const latitud = parseFloat('<%= travel.origen_lat %>');
-      const longitud = parseFloat('<%= travel.origen_lng %>');
+  <h1>Viaje N° - Detalles del Viaje</h1>
+  <table>
+    <tbody>
+      <tr>
+        <td id="origen"></td>
+        <td id="destino"></td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="map"></div>
 
-    const map = L.map('map').setView([latitud, longitud], 13);
+  <script>
+    const origenLat = parseFloat('<%= travel.origen_lat %>');
+    const origenLng = parseFloat('<%= travel.origen_lng %>');
+    const destinoLat = parseFloat('<%= travel.destino_lat %>');
+    const destinoLng = parseFloat('<%= travel.destino_lng %>');
+
+    const map = L.map('map').setView([origenLat, origenLng], 13);
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
-    L.marker([latitud, longitud]).addTo(map);
+    L.marker([origenLat, origenLng]).addTo(map).bindPopup('Origen').openPopup();
+    L.marker([destinoLat, destinoLng]).addTo(map).bindPopup('Destino').openPopup();
+
+    document.getElementById('origen').innerText = 'Origen: ' + '<%= travel.origen %>';
+    document.getElementById('destino').innerText = 'Destino: ' + '<%= travel.destino %>';
   </script>
 
 </body>
