@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
           const data = await response.json();
           console.log('Viaje almacenado con éxito:', data);
           // Puedes redirigir a otra página o hacer algo con la respuesta si lo necesitas
+          // Cambiar el texto del botón a "Remis solicitado"
+          const submitBtn = document.getElementById('submitBtn');
+          submitBtn.textContent = 'Remis solicitado';
         } else {
           throw new Error('Error al almacenar el viaje');
         }
