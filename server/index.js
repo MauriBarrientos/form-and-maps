@@ -32,7 +32,7 @@ app.set('view engine', 'ejs');
 // Routes
 
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('travelRequest');
 });
 // app.use('/', indexRouter);
 app.use('/travel', travelRouter);

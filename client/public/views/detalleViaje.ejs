@@ -1,32 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detalles del Viaje</title>
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tuRemo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend+Zetta:wght@300&family=Roboto:wght@100&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="/img/Taxi-Yellow-PNG-Photo.png">  
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <style>
-    #map {
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+      #map {
       height: 300px;
       width: 100%;
-    }
-  </style>
-</head>
-<body>
-  <h1>Viaje N° - Detalles del Viaje</h1>
-  <table>
-    <tbody>
-      <tr>
-        <td id="origen"></td>
-        <td id="destino"></td>
-      </tr>
-    </tbody>
-  </table>
-  <div id="map"></div>
-  <button id="acceptTripButton">Aceptar Viaje</button>
+      }
+      .letras{
+      color: #202020;
+      font-family: 'Ubuntu', sans-serif;
+      }
+      button{
+      background-color: #F2F56A;
+      border-radius: 5px;
+      border-color: #F2F56A;
+      width: 250px;
+      font-size: 25px;
+  }
+    </style>
+  </head>
+  <body class="d-flex min-vh-80 text-center text-white">
+    <div class="cover-container d-flex w-100 h-100 flex-column">
+      <nav class="navbar navbar-expand-md navbar-dark  bg-warning mb-4">
+        <div class="container-fluid" style="display: flex; flex-direction: column;">
+          <img src="/img/taxi.jpg" style="width: 50px; opacity: .5;" alt="">
+          <a class="navbar-brand" href="/">tuRemo</a>
+    
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="btn btn-outline-light m-2" aria-current="page" href="/empresa">Empresa</a>
+              </li>
+              <li class="nav-item">
+                <a class="btn btn-outline-light m-2" href="/support">Soporte</a>
+              </li>
+            </ul>
+    
+            <form class="d-flex" role="search">
+              <a class="btn btn-outline-light m-2" aria-current="page" href="/registro">Registrarse</a>
+              <br>
+              <a class="btn btn-outline-light m-2" aria-current="page" href="/login">Ingresar</a>
+              </form>
+          </div>
+        </div>
+      </nav>
+      <div class="letras d-flex flex-column justify-content-center align-items-center m-4 my-sm-4 my-md-5">
+      <div class="d-grid gap-2 col-sm-6 col-md-4">
+        <h1>Detalles del Viaje</h1>
+        <table>
+          <tbody>
+            <tr>
+              <td id="origen"></td>
+              <td id="destino"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div id="map"></div>
+        <button id="acceptTripButton">Aceptar Viaje</button>
+</body>
 
-  <script>
+
+<script>
     const origenLat = parseFloat('<%= travel.origen_lat %>');
     const origenLng = parseFloat('<%= travel.origen_lng %>');
     const destinoLat = parseFloat('<%= travel.destino_lat %>');
@@ -46,7 +102,7 @@
 
     const acceptTripButton = document.getElementById('acceptTripButton');
 
-acceptTripButton.addEventListener('click', () => {
+  acceptTripButton.addEventListener('click', () => {
   const travelId = '<%= travel.id %>';
 
   fetch(`http://localhost:4000/travel/update/${travelId}`, {
@@ -66,9 +122,7 @@ acceptTripButton.addEventListener('click', () => {
   .catch(error => {
     console.error('Error al actualizar el estado del viaje:', error);
   });
-});
+  });
 
-  </script>
-
-</body>
+</script>
 </html>
