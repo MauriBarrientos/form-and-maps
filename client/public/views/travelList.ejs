@@ -8,11 +8,14 @@
 <body>
   <h1>Lista de Viajes</h1>
   <ul>
-    <% travels.forEach((travel) => { %>
+    <% travels.forEach((travel) => {
+      if (travel.estado !== 0) {
+    %>
       <li>
         <a href="/travel/<%= travel.id %>" target="_blank">Viaje N<%= travel.id %></a>
       </li>
-    <% }); %>
+    <% }
+    }); %>
   </ul>
 </body>
 </html>

@@ -39,6 +39,23 @@ travelController.getTravel = async (req, res) => {
   }
 }
 
+export const getTravelDetails = async (req, res) => {
+  const { travelId } = req.params;
+
+  try {
+    const travel = await Travel.findByPk(travelId);
+
+    if (!travel) {
+      return res.status(404).json({ message: 'Viaje no encontrado' });
+    }
+
+    return res.status(200).json({ travel });
+  } catch (error) {
+    console.error('Error al obtener los detalles del viaje:', error);
+    return res.status(500).json({ error: 'Hubo un error al obtener los detalles del viaje' });
+  }
+};
+
 travelController.showTravelList = async (req, res) => {
   try {
     console.log('Executing showTravelList')
@@ -48,6 +65,27 @@ travelController.showTravelList = async (req, res) => {
   } catch (error) {
     console.error('Error al obtener la lista de viajes:', error);
     return res.status(500).json({ error: 'Hubo un error al obtener la lista de viajes' });
+  }
+};
+
+travelController.updateTravelStatus = async (req, res) => {
+  const { travelId } = req.params;
+
+  try {
+    const travel = await Travel.findByPk(travelId);
+
+    if (!travel) {
+      return res.status(404).json({ message: 'Viaje no encontrado' });
+    }
+
+    // Actualiza el estado del viaje a 0 (aceptado)
+    travel.estado = 0;
+    await travel.save();
+
+    return res.status(200).json({ message: 'Estado del viaje actualizado correctamente' });
+  } catch (error) {
+    console.error('Error al actualizar el estado del viaje:', error);
+    return res.status(500).json({ error: 'Hubo un error al actualizar el estado del viaje' });
   }
 };
 
